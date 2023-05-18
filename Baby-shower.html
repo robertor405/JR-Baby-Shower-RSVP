@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP Baby Shower</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Castoro+Titling&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+body{
+  font-family: Calligraffitti;
+  background-image: url(img/close-up-baby-shoes.jpeg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.main{
+  display: grid;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+.title{
+  display: flex;
+  flex: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: Calligraffitti;
+  width: 100%;
+  height: 55px;
+  margin: 0%;
+  
+}
+
+.container{
+  width:320px;
+  height: 420px;
+  background-color:rgba(245, 245, 245, 0.498);
+  top: 51%;
+  left:53%;
+  position: absolute;
+  transform: translate(-53%, -57%);
+  box-sizing: border-box;
+  padding: 50px 10px;
+}
+
+
+
+.avatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -60px;
+  left: calc(50% - 50px);
+  opacity: 0.9 ;
+}
+
+
+  .info{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+    font-weight:bold;
+    padding: 0;
+  }
+  .info:hover{
+    color: blue;
+  }
+
+  input{
+    width: 100%;
+    margin-bottom: 20px;
+    margin-left: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: black;
+    transition: box-shadow 0.15s
+  }
+
+  .inputName{
+    font-size: 19px;
+    text-align: center;
+    font-family:Calligraffitti; 
+    font-weight:bolder;
+  
+ 
+  }
+
+  .inputNumber{
+    font-size: 19px;
+    text-align: center;
+    font-family: Calligraffitti;;
+    font-weight: bolder;
+  }
+
+.inputName:hover,
+.inputNumber:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15)
+}
+
+.inputName:focus,
+.inputNumber:focus {
+ outline: 3px solid white;
+}
+
+
+
+.submit-button {
+  border: none;
+  outline: none;
+  width: 200px;
+  height: 40px;
+  font-family:Calligraffitti;; ;
+  font-size: 18px;
+  background:rgba(255, 255, 255, 0.858);
+  color:black;
+  border-radius: 20px;
+  position: absolute;
+  left:20%;
+  transition: box-shadow 0.15s
+}
+
+p{
+  margin: 0;
+  padding: 0;
+  top:350px;
+  position: absolute;
+  font-weight:bolder;
+  font-size: 16px;
+}
+
+p:hover{
+  color: blue;
+}
+
+.one{
+  margin-bottom: 10px;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15)
+}
+
+.submit-button:active {
+  opacity: 0.5;
+}
+
+
+@media (min-width:600px){}
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+<div class="main">
+<div class="title">
+  <h1>Baby Shower Rsvp</h1>
+</div>
+
+<div class="container">
+  <img class="avatar" src="img/baby-icon3.JPG">
+  <div class="info">
+  <div class="one"> &#183 Enter one name / Introduce un nombre</div>
+  <div class="two"> &#183 Enter number of members in group / Ingrese el numero de miembros en el grupo</div>
+  </div>
+  <input class="js-alphabetical inputName" placeholder="Name / Nombre" onkeydown="handleGuestKeydown(event)">
+  <input class="js-numerical inputNumber" placeholder="Number / Numero" onkeydown="handleGuestKeydown(event)">
+  <button class="submit-button" onclick="addGuest()">Submit/Entregar</button> 
+  <p class="js-name-of-guest js-number-of-guest greeting "></p>
+</div>
+</div>
+<script>
+
+function handleGuestKeydown(event) {
+  if (event.key === 'Enter') {
+    addGuest();
+  }
+}
+
+let rsvpList = [];
+
+function addGuest() {
+  const inputNameInput = document.querySelector('.js-alphabetical');
+  let name = inputNameInput.value;
+
+  const inputElement = document.querySelector('.js-numerical');
+  let numberAttendees = Number(inputElement.value);
+
+  if (numberAttendees > 7 || numberAttendees < 1) {
+    alert('Please enter a number of group members between 1 and 8, for any assistance contact us / Por favor ingrese un numero de miembros del grupo entre 1 y 8, para asistencia contacta nos');
+    return;
+  }
+
+  document.querySelector('.js-name-of-guest').innerHTML;
+  document.querySelector('.js-number-of-guest').innerHTML = ` Thank you ${name}, the number of members in your group is ${numberAttendees} - Gracias ${name}, el número de miembros de su grupo es ${numberAttendees} `;
+
+  rsvpList.push({ name, numberAttendees });
+  console.log(rsvpList);
+
+  let totalAttendees = 0;
+  for (let i = 0; i < rsvpList.length; i++) {
+    totalAttendees += rsvpList[i].numberAttendees
+
+  }
+    console.log(totalAttendees);
+  
+    inputElement.value = '';
+    inputNameInput.value = '';
+   
+  // store the updated rsvpList array in localStorage
+  localStorage.setItem('rsvpList', JSON.stringify(rsvpList));
+  }
+  
+  function retrieveGuestList() {
+    const storedList = localStorage.getItem('rsvpList');
+    if (storedList) {
+      rsvpList = JSON.parse(storedList);
+      console.log(rsvpList);
+    }
+  }
+  
+  // retrieve the guest list when the page loads
+  retrieveGuestList();
+  
+  function deleteGuest(index) {
+    rsvpList.splice(index,1 );
+    localStorage.setItem('rsvpList', JSON.stringify(rsvpList));
+  }
+ 
+  
+
+</script>
+
+  </body>
+</html>
